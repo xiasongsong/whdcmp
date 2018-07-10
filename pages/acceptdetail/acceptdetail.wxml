@@ -1,0 +1,82 @@
+<view class="accept-detail">
+  <view class="title">房产信息</view>
+  <view class="section">
+    <view class="p">房产：武汉地产xx项目一期xxxxxxx</view>
+    <view class="p">业主：王小田</view>
+  </view>
+  <view class="title">房间问题</view>
+  <view class="section">
+    <view class="flex p p1">
+      <view class="fh">
+        <view class="main">
+          <text>主卧</text>
+          <text>地板</text>
+        </view>
+        <view class="sub">有裂纹，不平整</view>
+      </view>
+      <view class="fb" style="color:{{colorMap['已通过']}}">
+        已通过
+      </view>
+    </view>
+    <view class="flex p p1">
+      <view class="fh">
+        <view class="main">
+          <text>主卧</text>
+          <text>地板</text>
+        </view>
+        <view class="sub">有裂纹，不平整</view>
+      </view>
+      <view class="fb" style="color:{{colorMap['已整改']}}">
+        已整改
+      </view>
+    </view>
+    <view class="flex p p1">
+      <view class="fh">
+        <view class="main">
+          <text>主卧</text>
+          <text>地板</text>
+        </view>
+        <view class="sub">有裂纹，不平整</view>
+      </view>
+      <view class="fb" style="color:{{colorMap['待整改']}}">
+        待整改
+      </view>
+    </view>
+  </view>
+  <view class="title">交付信息</view>
+  <view class="section">
+    <view class="flex p p2">
+      <view class="fh">电表底数</view>
+      <view class="fb">12度</view>
+    </view>
+    <view class="flex p p2">
+      <view class="fh">水表底数</view>
+      <view class="fb">12立方</view>
+    </view>
+    <view class="flex p p2">
+      <view class="fh">气表底数</view>
+      <view class="fb">12立方</view>
+    </view>
+    <view class="flex p p2">
+      <view class="fh">钥匙留底</view>
+      <view class="fb">1把</view>
+    </view>
+    <view class="flex p p2">
+      <view class="fh">业主签名</view>
+      <view class="fb">
+        <image src="../../images/sample.png" mode="widthFix"></image>
+      </view>
+    </view>
+  </view>
+  <view class="title">工程师信息</view>
+  <view class="section">
+    <view class="flex p p2">
+      <view class="fh">工程师</view>
+      <view class="fb">万恒</view>
+    </view>
+    <view class="flex p p2">
+      <view class="fh">联系电话</view>
+      <view class="fb" data-tel="123123113" bindtap="teleCall">188888800088</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,47 @@
+<view class="mine">
+  <view class="top">
+    <view class="vm">
+      <image src="{{userInfo.avatarUrl}}" class="avatar" mode="aspectFill" />
+      <view class="info">
+        <text wx:if="{{engineerInfo.Name}}" class="name">{{engineerInfo.Name}}</text>
+        <text wx:else class="name">游客</text>
+        <view wx:if="{{hasUserInfo && engineerInfo.Sort}}" class="my-score">
+          <star score="{{engineerInfo.Sort}}" readOnly size="mini" />
+          <text>{{engineerInfo.Sort}}分</text>
+        </view>
+      </view>
+      <block wx:if="{{!hasUserInfo}}">
+        <view class="before-use">使用前请</view>
+        <button plain open-type="getUserInfo" bindgetuserinfo="userinfoHandler" size="mini" class="login">登录</button>
+      </block>
+    </view>
+  </view>
+  <view class="content">
+    <view wx:if="{{hasUserInfo}}" class="section">
+      <view class="title">累计</view>
+      <view class="flex plr">
+        <view class="flex-item">
+          <text class="count">{{engineerInfo.benyueCount}}</text>
+          <text>接单数</text>
+        </view>
+        <view class="flex-item">
+          <text class="count">{{engineerInfo.benyuePass}}</text>
+          <text>已完成单数</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{hasUserInfo}}" class="section">
+      <view class="title">本月</view>
+      <view class="flex plr">
+        <view class="flex-item">
+          <text class="count">{{engineerInfo.benyueCount}}</text>
+          <text>接单数</text>
+        </view>
+        <view class="flex-item">
+          <text class="count">{{engineerInfo.benyuePass}}</text>
+          <text>已完成单数</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/acceptrecord/acceptrecord",
+    "pages/acceptdetail/acceptdetail",
+    "pages/mine/mine",
+    "pages/check/check",
+    "pages/batchdetail/batch-list",
+    "pages/refuserecord/refuserecord",
+    "pages/orderdetail/orderdetail",
+    "pages/refuse/refuse",
+    "pages/housedetail/housedetail",
+    "pages/accept/accept",
+    "pages/addnew/addnew",
+    "pages/sign/sign"
+  ],
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#333",
+    "list": [
+      {
+        "pagePath": "pages/check/check",
+        "text": "验房",
+        "iconPath": "images/check.png",
+        "selectedIconPath": "images/check-h.png"
+      },
+      {
+        "pagePath": "pages/acceptrecord/acceptrecord",
+        "text": "已验收",
+        "iconPath": "images/list.png",
+        "selectedIconPath": "images/list-h.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine-h.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#f2f2f2",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#004294",
+    "navigationBarTitleText": "武汉地产",
+    "navigationBarTextStyle": "#fff"
+  }
+}

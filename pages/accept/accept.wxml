@@ -1,0 +1,56 @@
+<view class="accept">
+  <view class="section">
+    <view class="flex">
+      <view class="fh">电表底数</view>
+      <view class="fb">
+        <input type="digit"   bindinput='dianbiao' placeholder="请填写"></input>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="fh">水表底数</view>
+      <view class="fb">
+        <input type="digit"   bindinput='shuibiao' placeholder="请填写"></input>
+      </view>
+    </view>
+    <view class="flex">
+      <view class="fh">气表底数</view>
+      <view class="fb">
+        <input type="digit" bindinput='qibiao' placeholder="请填写"></input>
+      </view>
+    </view>
+ 
+  </view>
+  <view class="section">
+    <picker class="picker" mode="date" value="{{date}}" bindchange="dateChangeHandler">
+      <view class="flex">
+        <view class="fh">接待日期</view>
+        <view class="fb">
+          <input disabled value="{{date}}" placeholder="请选择"></input>
+        </view>
+        <image class="icon" src="../../images/arrow-right.png"></image>
+      </view>
+  </picker>
+    <view class="flex">
+      <view class="fh">满意度</view>
+      <view class="fb">
+        <star score="3" readOnly="{{false}}" bindscorechange="scoreChangeHandler" />
+      </view>
+      <view class="desc">
+        {{judge[score - 1]}}
+      </view>
+    </view>
+  </view>
+  <view class="section padding">
+    <view class="title">用户签名</view>
+    <view wx:if="{{!signImage}}" class="placehold" bindtap="openSign">
+      请点击此处进行签名
+    </view>
+    <block wx:else>
+      <image class="signImage" src="{{signImage}}" mode="aspectFit" />
+      <view style="text-align:right">
+        <button class="rewrite" size="mini" bindtap="openSign">重写</button>
+      </view>
+    </block>
+  </view>
+  <button class="submit" bindtap='Add'>提交</button>
+</view>
