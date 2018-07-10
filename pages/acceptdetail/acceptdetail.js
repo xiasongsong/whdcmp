@@ -48,5 +48,21 @@ Page({
   onUnload() { },
   onPullDownRefresh() { },
   onReachBottom() { },
-  onShareAppMessage() { }
+  onShareAppMessage(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: app.globalData.shareConf.title,
+      path: app.globalData.shareConf.path,
+      imageUrl: app.globalData.shareConf.imgUrl,
+      success(res) {
+        // 转发成功
+      },
+      fail(res) {
+        // 转发失败
+      }
+    }
+  }
 })

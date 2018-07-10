@@ -17,7 +17,6 @@ Page({
   },
   userinfoHandler(e) {
     if (e.detail.userInfo) {
-      console.log(1)
       app.globalData.userInfo = e.detail.userInfo
       let encryptedData = e.detail.encryptedData
       let iv = e.detail.iv
@@ -59,7 +58,6 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      this.getEngineerInfo()
     } else if (this.data.canIUse) {
       console.log(2, app.globalData.openid)
       app.userInfoReady = res => {
@@ -69,7 +67,6 @@ Page({
           hasUserInfo: true
         })
       }
-      this.getEngineerInfo()
     } else {
       console.log(3, app.globalData.openid)
       wx.getUserInfo({
@@ -81,6 +78,9 @@ Page({
           })
         }
       })
+    }
+    if (app.globalData.openid) {
+      console.log(1231231)
       this.getEngineerInfo()
     }
   },
@@ -90,5 +90,21 @@ Page({
   onUnload() {},
   onPullDownRefresh() {},
   onReachBottom() {},
-  onShareAppMessage() {}
+  onShareAppMessage(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: app.globalData.shareConf.title,
+      path: app.globalData.shareConf.path,
+      imageUrl: app.globalData.shareConf.imgUrl,
+      success(res) {
+        // 转发成功
+      },
+      fail(res) {
+        // 转发失败
+      }
+    }
+  }
 })

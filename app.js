@@ -36,6 +36,7 @@ App({
                       wx.showTabBar()
                       wx.getUserInfo({
                         success: res => {
+                          this.getEngineerInfo()
                           this.globalData.userInfo = res.userInfo
                           if (this.userInfoReady) {
                             this.userInfoReady(res)
@@ -86,7 +87,7 @@ App({
     shareConf: {
       title: '武汉地产在线收房',
       path: '/pages/mine/mine',
-      imgUrl: '/images/share.jpg'
+      imgUrl: '/images/share.png'
     }
   }
 })
