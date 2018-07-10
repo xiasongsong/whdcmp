@@ -16,32 +16,45 @@
       </block>
     </view>
   </view>
+ 
   <view class="content">
     <view wx:if="{{hasUserInfo}}" class="section">
-      <view class="title">累计</view>
+      <view class="title">模拟验房累计</view>
       <view class="flex plr">
         <view class="flex-item">
-          <text class="count">{{engineerInfo.benyueCount}}</text>
-          <text>接单数</text>
+          <text class="count">{{engineerInfo.TroubleCount}}</text>
+          <text>添加问题数</text>
         </view>
         <view class="flex-item">
-          <text class="count">{{engineerInfo.benyuePass}}</text>
-          <text>已完成单数</text>
+          <text class="count">{{engineerInfo.DeliverCount}}</text>
+          <text>收房数量</text>
+        </view>
+         <view class="flex-item">
+          <text class="count">{{engineerInfo.NoAccCount}}</text>
+          <text>暂不收房数</text>
         </view>
       </view>
     </view>
+  
+  </view>
+   <view class="content">
     <view wx:if="{{hasUserInfo}}" class="section">
-      <view class="title">本月</view>
+      <view class="title">正式验房累计</view>
       <view class="flex plr">
         <view class="flex-item">
-          <text class="count">{{engineerInfo.benyueCount}}</text>
-          <text>接单数</text>
+          <text class="count">{{engineerInfo.ZTroubleCount}}</text>
+          <text>添加问题数</text>
         </view>
         <view class="flex-item">
-          <text class="count">{{engineerInfo.benyuePass}}</text>
-          <text>已完成单数</text>
+          <text class="count">{{engineerInfo.ZDeliverCount}}</text>
+          <text>收房数量</text>
+        </view>
+         <view class="flex-item">
+          <text class="count">{{engineerInfo.ZNoAccCount}}</text>
+          <text>暂不收房数</text>
         </view>
       </view>
     </view>
+  
   </view>
 </view>

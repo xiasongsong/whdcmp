@@ -8,6 +8,10 @@ import {
 } from 'common/api/config.js'
 App({
   onLaunch() {
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
     wx.hideTabBar()
     wx.login({
       success: res => {
@@ -44,6 +48,7 @@ App({
                   }
                 })
               }
+              wx.hideLoading()
             },
             complete() {
               wx.hideLoading()

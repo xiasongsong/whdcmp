@@ -25,10 +25,11 @@ let login = () => {
               console.log(r)
               if (r.data.success) {
                 resolve(r.data.openid)
+                wx.hideLoading()
               }
             },
             complete () {
-              wx.hideLoading()
+             
             }
           })
         } else {
@@ -67,6 +68,7 @@ let getUserInfo = (OpenID) => {
           success(r) {
             if (r.data.IsSuccess) {
               resolve(r.data.Data)
+              wx.hideLoading()
             }
           }
         })
@@ -75,7 +77,7 @@ let getUserInfo = (OpenID) => {
         reject(err)
       },
       complete: res => {
-        wx.hideLoading()
+       
       }
     })
   })

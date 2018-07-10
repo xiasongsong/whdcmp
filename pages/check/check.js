@@ -53,7 +53,7 @@ Page({
       })
     }).exec()
   },
-  getList () {
+  getList (cb) {
     this.engineerInfo = app.globalData.engineerInfo
     fetch({
       Act: 'HCGetHouseCheckList',
@@ -68,6 +68,7 @@ Page({
         this.setData({
           [str]: res.data.Data
         })
+        cb && cb()
       }
     })
   },
@@ -80,11 +81,11 @@ Page({
     })
   },
   onLoad(options) {
-    this.getList()
   },
   onReady() { },
   onShow() {
     this.moveBar()
+    this.getList()
   },
   onHide() { },
   onUnload() { },
@@ -92,14 +93,12 @@ Page({
     this.setData({
       pulldown: true
     })
-    // this.getList()
-    let timeout = setTimeout(() => {
-      clearTimeout(timeout)
+    this.getList(() => {
       wx.stopPullDownRefresh()
       this.setData({
         pulldown: false
       })
-    }, 1000)
+    })
   },
   onShareAppMessage() { }
 })

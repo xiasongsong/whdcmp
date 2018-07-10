@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/acceptrecord/acceptrecord",
     "pages/acceptdetail/acceptdetail",
-    "pages/mine/mine",
+   
     "pages/check/check",
     "pages/batchdetail/batch-list",
     "pages/refuserecord/refuserecord",
@@ -23,12 +24,7 @@
         "iconPath": "images/check.png",
         "selectedIconPath": "images/check-h.png"
       },
-      {
-        "pagePath": "pages/acceptrecord/acceptrecord",
-        "text": "已验收",
-        "iconPath": "images/list.png",
-        "selectedIconPath": "images/list-h.png"
-      },
+      
       {
         "pagePath": "pages/mine/mine",
         "text": "我",

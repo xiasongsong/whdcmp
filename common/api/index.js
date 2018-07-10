@@ -8,7 +8,7 @@ let fetch = data => {
   return new Promise((resolve, reject) => {
     let _self = this
     wx.showLoading({
-      title: '获取中',
+      title: '加载中...',
       mask: true
     })
     wx.request({
@@ -32,7 +32,7 @@ let mock = url => {
   return new Promise((resolve, reject) => {
     let _self = this
     wx.showLoading({
-      title: '获取中',
+      title: '加载中...',
       mask: true
     })
     wx.request({

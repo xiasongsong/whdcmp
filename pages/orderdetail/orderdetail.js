@@ -1,3 +1,4 @@
+const app = getApp()
 import {
   colorMap
 } from '../../common/config.js'
@@ -59,6 +60,7 @@ Page({
   },
   // 提交通过
   getPass () {
+    var engineerid=app.globalData.engineerInfo.ID
     if (this.data.uploadImages.length < 1) {
       wx.showModal({
         showCancel: false,
@@ -71,6 +73,7 @@ Page({
       Act: 'HCPassHouseTrouble',
       Data: JSON.stringify({
         ID: this.data.id,
+        EngineerID:engineerid,
         FinishPicture: this.data.uploadImages.join(',')
       })
     }).then(res => {

@@ -87,15 +87,19 @@
 }
 .card-body {
   padding: 30rpx;
+}
+.card-body .building-item{
   display: flex;
   align-items:center;
+  justify-content: space-between;
+  margin-top: 20rpx;
 }
-.card-body>.wrapper{
+.card-body .wrapper{
   flex:1;
   font-size: 26rpx;
   color: #333;
 }
-.card-body>.get-detail{
+.card-body .get-detail{
   font-size: 24rpx;
   color: #004294;
   border-color: #004294;

@@ -37,7 +37,7 @@ Page({
         count: 6
       },
       {
-        name: '已通过',
+        name: '已验收',
         dot: 'passed',
         count: 5
       }
@@ -46,7 +46,7 @@ Page({
     list: []
   },
   init() {
-    let title = this.data.buildingName ? this.data.buildingName + '楼' : '测试楼'
+    let title = this.data.buildingName ? this.data.buildingName + '栋' : '测试楼'
     wx.setNavigationBarTitle({
       title
     })
@@ -150,7 +150,7 @@ Page({
     })
   },
   // 获取楼层
-  getFloors (Statu = '') {
+  getFloors(Statu = '', cb) {
     fetch({
       Act: 'HCGetBuildUnitList',
       Data: JSON.stringify({
@@ -165,7 +165,7 @@ Page({
         let list = res.data.Data
         list.forEach(item => {
           item.infolosts.forEach(house => {
-            let classname = house.statu === '已通过'
+            let classname = house.statu === '已验收'
                             ? 'passed'
                             : house.statu === '已整改'
                             ? 'success'
@@ -179,6 +179,7 @@ Page({
           list,
           computedList: list
         })
+        cb && cb()
       }
     })
   },
@@ -186,12 +187,23 @@ Page({
   goHouseDetail (e) {
     let id = e.target.dataset.houseid
     let houseno = e.target.dataset.houseno
+    let statu = e.target.dataset.statu
     let building = e.target.dataset.building
     let floor = e.target.dataset.floor
     let unit = e.target.dataset.unit
+ 
+    if(statu=="已验收")
+    {
+      wx.navigateTo({
+        url: `/pages/acceptdetail/acceptdetail?id=${id}`,
+      })
+    }
+    else
+    {
     wx.navigateTo({
       url: `/pages/housedetail/housedetail?id=${id}&houseno=${houseno}&building=${building}&floor=${floor}&unit=${unit}`,
     })
+    }
   },
   onLoad(options) {
     let buildingName = options.name || ''
@@ -215,12 +227,15 @@ Page({
     this.setData({
       pulldown: true
     })
-    let timeout = setTimeout(() => {
-      clearTimeout(timeout)
+    this.getFloors(this.data.filters[this.data.activeFilterIndex].name, () => {
       wx.stopPullDownRefresh()
       this.setData({
         pulldown: false
       })
+    })
+    let timeout = setTimeout(() => {
+      clearTimeout(timeout)
+
     }, 1000)
   },
   onReachBottom() { },

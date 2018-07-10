@@ -46,6 +46,7 @@ Page({
         this.setData({
           engineerInfo
         })
+        console.log(this.data.engineerInfo)
       }
     }).catch(err => {
       console.log(err)
@@ -68,6 +69,7 @@ Page({
           hasUserInfo: true
         })
       }
+      this.getEngineerInfo()
     } else {
       console.log(3, app.globalData.openid)
       wx.getUserInfo({
@@ -79,6 +81,7 @@ Page({
           })
         }
       })
+      this.getEngineerInfo()
     }
   },
   onReady() {},

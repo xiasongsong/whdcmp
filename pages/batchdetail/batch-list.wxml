@@ -32,6 +32,7 @@
           bindtap='goHouseDetail'
           data-houseid="{{house.id}}"
           data-houseno="{{house.name}}"
+          data-statu="{{house.statu}}"
           data-floor="{{item.Title}}"
           data-building="{{buildingName}}"
           data-unit="{{unitList[curUnitIndex]}}"

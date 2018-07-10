@@ -1,70 +1,44 @@
 <view class="accept-detail">
   <view class="title">房产信息</view>
   <view class="section">
-    <view class="p">房产：武汉地产xx项目一期xxxxxxx</view>
-    <view class="p">业主：王小田</view>
+    <view class="p">房产：{{content.tage}}</view>
+    <view class="p">业主：{{content.Deliver.House.OwnerName}}</view>
   </view>
   <view class="title">房间问题</view>
-  <view class="section">
-    <view class="flex p p1">
+  <view class="section" >
+    <view class="flex p p1" wx:for="{{content.TroubleList}}" wx:key='{{item}}'>
       <view class="fh">
         <view class="main">
-          <text>主卧</text>
-          <text>地板</text>
+          <text>{{item.Part}}</text>
+          <text>{{item.PartRes}}</text>
         </view>
-        <view class="sub">有裂纹，不平整</view>
+        <view class="sub">{{item.PartResTrouble}}</view>
       </view>
-      <view class="fb" style="color:{{colorMap['已通过']}}">
-        已通过
+      <view class="fb" style="color:{{colorMap[item.Statu]}}">
+        {{item.Statu}}
       </view>
     </view>
-    <view class="flex p p1">
-      <view class="fh">
-        <view class="main">
-          <text>主卧</text>
-          <text>地板</text>
-        </view>
-        <view class="sub">有裂纹，不平整</view>
-      </view>
-      <view class="fb" style="color:{{colorMap['已整改']}}">
-        已整改
-      </view>
-    </view>
-    <view class="flex p p1">
-      <view class="fh">
-        <view class="main">
-          <text>主卧</text>
-          <text>地板</text>
-        </view>
-        <view class="sub">有裂纹，不平整</view>
-      </view>
-      <view class="fb" style="color:{{colorMap['待整改']}}">
-        待整改
-      </view>
-    </view>
+  
   </view>
   <view class="title">交付信息</view>
   <view class="section">
     <view class="flex p p2">
       <view class="fh">电表底数</view>
-      <view class="fb">12度</view>
+      <view class="fb">{{content.Deliver.ElectricMeterDegree}}度</view>
     </view>
     <view class="flex p p2">
       <view class="fh">水表底数</view>
-      <view class="fb">12立方</view>
+      <view class="fb">{{content.Deliver.WaterMeterDegree}}立方</view>
     </view>
     <view class="flex p p2">
       <view class="fh">气表底数</view>
-      <view class="fb">12立方</view>
+      <view class="fb">{{content.Deliver.GasMeterDegree}}立方</view>
     </view>
-    <view class="flex p p2">
-      <view class="fh">钥匙留底</view>
-      <view class="fb">1把</view>
-    </view>
+   
     <view class="flex p p2">
       <view class="fh">业主签名</view>
       <view class="fb">
-        <image src="../../images/sample.png" mode="widthFix"></image>
+        <image src="{{content.Deliver.Autograph}}" mode="widthFix"></image>
       </view>
     </view>
   </view>
@@ -72,11 +46,11 @@
   <view class="section">
     <view class="flex p p2">
       <view class="fh">工程师</view>
-      <view class="fb">万恒</view>
+      <view class="fb">{{content.Deliver.Engineer.Name}}</view>
     </view>
     <view class="flex p p2">
       <view class="fh">联系电话</view>
-      <view class="fb" data-tel="123123113" bindtap="teleCall">188888800088</view>
+      <view class="fb" data-tel="{{content.Deliver.Engineer.Tel}}" bindtap="teleCall">{{content.Deliver.Engineer.Tel}}</view>
     </view>
   </view>
 </view>

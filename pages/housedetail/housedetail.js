@@ -155,6 +155,9 @@ Page({
     // this.watchFilters('states', true)
     this.watchFilters('rooms', true)
     this.watchFilters('positions', true)
+    this.setData({
+      positions: []
+    })
   },
   // 切换tab
   tabTap (e) {
@@ -250,7 +253,7 @@ Page({
     let floor = options.floor
     let unit = options.unit
     let houseno = options.houseno
-    let title = houseno ? building + '-' + unit + '-' + floor + '-' + houseno  : '测试房号1203'
+    let title = houseno ? building + '-' + unit + '-' + houseno  : '测试房号1203'
     wx.setNavigationBarTitle({
       title
     })

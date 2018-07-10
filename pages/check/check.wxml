@@ -17,12 +17,12 @@
               <text class="title">{{item.Title}}</text>
             </view>
             <view class="card-body">
-              <block wx:for="{{item.infolosts}}" wx:for-item="building" wx:key="{{building}}">
+              <view wx:for="{{item.infolosts}}" wx:for-item="building" wx:key="{{building}}" class="building-item">
                 <view class="wrapper">
                   {{building.name}}
                 </view>
                 <button data-batchid="{{item.ID}}" data-building="{{building.id}}" data-name="{{building.name}}" class="get-detail" size="mini" plain bindtap="getDetail">查看</button>
-              </block>
+              </view>
             </view>
           </view>
         </view>

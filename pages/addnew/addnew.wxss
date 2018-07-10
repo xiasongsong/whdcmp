@@ -1,4 +1,6 @@
-.addnew{}
+.addnew{
+  padding-bottom: 30rpx;
+}
 .section{
   background: #fff;
   margin:20rpx 0;

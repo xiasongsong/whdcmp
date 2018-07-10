@@ -6,19 +6,20 @@ import {
 } from '../../common/config.js'
 Page({
   data: {
-    id: '',
+    houseid: '',
     content: null,
     colorMap
   },
   getData() {
     fetch({
-      Act: '',
+      Act: 'HCGetHouseDeliver',
       Data: JSON.stringify({
         ID: this.data.id
       })
     }).then(res => {
       if (res.data.IsSuccess) {
         let content = res.data.Data
+        console.log(content)
         this.setData({
           content
         })
@@ -41,7 +42,7 @@ Page({
   },
   onReady() { },
   onShow() {
-    // this.getList()
+     this.getData()
   },
   onHide() { },
   onUnload() { },

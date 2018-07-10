@@ -103,6 +103,7 @@ Page({
        shuibiao: shuibiao,
        dianbiao: dianbiao,
        qibiao: qibiao,
+       Score:this.data.score
      })
    }).then(res => {
      if (res.data.IsSuccess) {
@@ -121,6 +122,7 @@ Page({
    })
   },
   onLoad(options) {
+    app.globalData.signImage = ''
     this.setData({ id: options.id, checkid: options.checkid })
   },
   onReady() {
