@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "问题详情",
+    "usingComponents": {
+      "split": "/components/split/split",
+      "no-data": "/components/nodata/no-data"
+    }
+}

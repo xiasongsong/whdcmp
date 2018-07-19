@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "暂不接收记录",
+  "usingComponents": {
+    "no-data": "/components/nodata/no-data"
+  }
+}

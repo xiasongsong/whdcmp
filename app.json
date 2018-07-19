@@ -1,43 +1,37 @@
 {
   "pages": [
-    "pages/mine/mine",
-    "pages/acceptrecord/acceptrecord",
-    "pages/acceptdetail/acceptdetail",
-   
-    "pages/check/check",
-    "pages/batchdetail/batch-list",
-    "pages/refuserecord/refuserecord",
-    "pages/orderdetail/orderdetail",
-    "pages/refuse/refuse",
-    "pages/housedetail/housedetail",
-    "pages/accept/accept",
-    "pages/addnew/addnew",
-    "pages/sign/sign"
+    "pages/index/index",
+    "pages/leader/echart/echart",
+    "pages/leader/batchlist/batchlist",
+    "pages/repairengineer/batchlist/batchlist",
+    "pages/holder/batchlist/batchlist",
+    "pages/holder/problemlist/problemlist",
+    "pages/holder/problemdetail/problemdetail",
+    "pages/checkengineer/check/check",
+    "pages/checkengineer/acceptrecord/acceptrecord",
+    "pages/checkengineer/acceptdetail/acceptdetail",
+    "pages/checkengineer/batchdetail/batch-list",
+    "pages/checkengineer/refuserecord/refuserecord",
+    "pages/checkengineer/orderdetail/orderdetail",
+    "pages/checkengineer/refuse/refuse",
+    "pages/checkengineer/housedetail/housedetail",
+    "pages/checkengineer/accept/accept",
+    "pages/checkengineer/addnew/addnew",
+    "pages/checkengineer/sign/sign",
+    "pages/checkengineer/mine/mine",
+    "pages/repairengineer/problemlist/problemlist",
+    "pages/repairengineer/problemdetail/problemdetail",
+    "pages/leader/batchdetail/batchdetail",
+    "pages/leader/housedetail/housedetail",
+    "pages/leader/acceptdetail/acceptdetail",
+    "pages/leader/orderdetail/orderdetail",
+    "pages/leader/refuserecord/refuserecord"
   ],
-  "tabBar": {
-    "color": "#666",
-    "selectedColor": "#333",
-    "list": [
-      {
-        "pagePath": "pages/check/check",
-        "text": "验房",
-        "iconPath": "images/check.png",
-        "selectedIconPath": "images/check-h.png"
-      },
-      
-      {
-        "pagePath": "pages/mine/mine",
-        "text": "我",
-        "iconPath": "images/mine.png",
-        "selectedIconPath": "images/mine-h.png"
-      }
-    ]
-  },
   "window": {
     "backgroundColor": "#f2f2f2",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#004294",
-    "navigationBarTitleText": "武汉地产",
+    "navigationBarTitleText": "武汉地产移动验房",
     "navigationBarTextStyle": "#fff"
   }
 }

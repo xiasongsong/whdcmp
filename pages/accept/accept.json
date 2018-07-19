@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "交付信息",
-  "usingComponents": {
-    "star": "/components/star/star"
-  }
-}

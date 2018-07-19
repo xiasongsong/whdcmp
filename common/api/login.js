@@ -3,13 +3,17 @@ import {
   api,
   MOCK_URL
 } from './config.js'
+import {
+  fetch
+} from './index.js'
 // 登录
 let login = () => {
+  wx.showLoading({
+    title: '',
+    mask: true
+  })
+  console.log('denglu')
   return new Promise((resolve, reject) => {
-    wx.showLoading({
-      title: '登录...',
-      mask: true
-    })
     wx.login({
       success: res => {
         if (res.code) {
@@ -21,34 +25,33 @@ let login = () => {
                 code: res.code
               })
             },
-            success(r) {
-              console.log(r)
-              if (r.data.success) {
-                resolve(r.data.openid)
-                wx.hideLoading()
-              }
+            success (r) {
+              resolve(r)
             },
-            complete () {
-             
-            }
+            complete () {}
           })
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
           reject('获取用户登录态失败！' + res.errMsg)
         }
       },
-      fail: err => {
+      fail (err) {
         reject(err)
       }
     })
   })
 }
-// 授权获取用户信息
-let getUserInfo = (OpenID) => {
-  wx.showLoading({
-    title: '获取中',
-    mask: true
+// 获取角色身份
+let getRoles = openid => {
+  return fetch({
+    Act: 'HCGetStaff',
+    Data: JSON.stringify({
+      OpenID: openid
+    })
   })
+}
+// 授权获取用户信息
+let getUserInfo = OpenID => {
   return new Promise((resolve, reject) => {
     wx.getUserInfo({
       withCredentials: true,
@@ -75,14 +78,12 @@ let getUserInfo = (OpenID) => {
       },
       fail: err => {
         reject(err)
-      },
-      complete: res => {
-       
       }
     })
   })
 }
 export {
   login,
+  getRoles,
   getUserInfo
 }

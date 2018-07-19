@@ -1,0 +1,15 @@
+<view class="enter">
+  <image src="../../images/ibg.png" class="bg"></image>
+  <image src="../../images/logo.png" mode="widthFix" class="logo"></image>
+  <view class="btn-group flex">
+    <button
+      wx:for="{{roles}}"
+      wx:key="role-{{index}}"
+      data-type="{{item.type}}"
+      class="btn"
+      bindtap="start"
+    >
+      <image class="icon" src="{{item.icon}}" mode="widthFix"></image>
+      {{item.name}}</button>
+  </view>
+</view>

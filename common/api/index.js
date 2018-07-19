@@ -1,16 +1,11 @@
 import {
   baseUrl,
-  testUrl,
   api,
   MOCK_URL
 } from './config.js'
 let fetch = data => {
   return new Promise((resolve, reject) => {
     let _self = this
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    })
     wx.request({
       url: baseUrl + api,
       method: 'POST',
@@ -21,9 +16,6 @@ let fetch = data => {
       },
       fail (res) {
         reject(res)
-      },
-      complete () {
-        wx.hideLoading()
       }
     })
   })
@@ -45,9 +37,6 @@ let mock = url => {
       },
       fail (res) {
         reject(res)
-      },
-      complete () {
-        wx.hideLoading()
       }
     })
   })

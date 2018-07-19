@@ -1,0 +1,25 @@
+<view class="charts">
+  <view class="container">
+    <view class="content">
+      <!-- <view class="main-title">{{types[typeIndex]}}-{{batches[batchIndex]}}</view> -->
+      <view class="section">
+        <view class="title">批次下问题状态</view>
+        <view class="trouble-bar">
+          <ec-canvas id="trouble-bar" canvas-id="trouble-bar" ec="{{ troubleStatus }}"></ec-canvas>
+        </view>
+        <view class="title">批次下房源状态</view>
+        <view class="house-bar">
+          <ec-canvas id="house-bar" canvas-id="house-bar" ec="{{ houseStatus }}"></ec-canvas>
+        </view>
+        <view class="title">批次下施工单位状态</view>
+        <view class="holder-bar">
+          <ec-canvas id="holder-bar" canvas-id="holder-bar" ec="{{ holderStatus }}"></ec-canvas>
+        </view>
+        <view class="title">批次下施工部位状态</view>
+        <view class="part-bar">
+          <ec-canvas id="part-bar" canvas-id="part-bar" ec="{{ partStatus }}"></ec-canvas>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

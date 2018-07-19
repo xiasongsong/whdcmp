@@ -1,0 +1,35 @@
+<view class="bacth-list">
+  <view class="tab-nav">
+    <view wx:for="{{tabMenus}}" wx:for-item="nav" wx:for-index="idx" wx:key="nav+{{idx}}" class="tabnav-item {{activeTabIndex === idx ? 'active' : ''}}" data-index="{{idx}}" bindtap="tabChangeHandler">
+      {{nav.name}}
+    </view>
+    <view class="movebar" style="{{moveBarStyle}}"></view>
+  </view>
+  <view class="container">
+    <pdloading hidden="{{!pulldown}}" class="loading" />
+    <swiper class="swiper" duration="300" current="{{activeTabIndex}}" bindchange="swiperChangeHandler">
+      <swiper-item wx:for="{{tabMenus}}" wx:for-item="sw" wx:for-index="idx" wx:key="swiper+{{idx}}">
+        <view wx:if="{{list[sw.target].length > 0}}" class="content" scroll-y="true">
+          <view wx:for="{{list[sw.target]}}" wx:key="{{Math.random().toString(36).substr(2)}}" class="card">
+            <view class="card-header flex">
+              <view class="fh">
+                <image class="icon" src="../../../images/mock.png"></image>
+                <text class="title">{{item.Name || '这里是批次号'}}</text>
+              </view>
+            </view>
+            <view class="card-body">
+              <view class="building-item">
+                <view class="wrapper">
+                  <view class="btns">
+                    <button wx:for="{{item.Btn}}" wx:key="btn-{{index}}" wx:for-item="btn" data-batchid="{{item.ID}}" bindtap="getDetail" class="btn" size="mini" data-type="{{btn.name}}">{{btn.name}}({{btn.count}})</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <no-data wx:else />
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
