@@ -1,6 +1,14 @@
 import { observer } from '../../common/utils/mobx-wxapp'
 import { watch, computed } from '../../common/utils/vuefy.js'
 import { fetch } from '../../common/api/index'
+import {
+  baseUrl,
+  api
+} from '../../common/api/config.js'
+import {
+  getRoles,
+  getUserInfo
+} from '../../common/api/login.js'
 const app = getApp()
 let store = app.globalData.store
 const roles = [
@@ -30,19 +38,13 @@ Page(observer({ store })({
     roles
   },
   check(Types) {
-    return fetch({
-      Act: 'HCGetStaff',
-      Data: JSON.stringify({
-        OpenID: store.baseInfo.OpenID,
-        Types
-      })
-    })
+    let UID = wx.getStorageSync('unionid')
+    return getRoles(UID, Types)
   },
   start(e) {
     let type = e.target.dataset.type
     let roleArr
     this.check(type).then(res => {
-      console.log(res)
       if (res.data.IsSuccess) {
         store.upRoleInfo(res.data.Data)
         roleArr = store.roleInfo.Type
@@ -83,13 +85,37 @@ Page(observer({ store })({
       console.log(err)
     })
   },
+  getUserInfoHandler (e) {
+    let encryptedData = e.detail.encryptedData
+    let iv = e.detail.iv
+    wx.showLoading({
+      title: '获取中'
+    })
+    getUserInfo(store.openid, encryptedData, iv).then(res => {
+      if (res.data.IsSuccess) {
+        // wx.hideLoading()
+        // 拿到个人unionid
+        let UID = res.data.Data.unionId
+        wx.setStorageSync('unionid', UID)
+        store.upunionid(UID)
+        getRoles(UID).then(res => {
+          wx.hideLoading()
+          if (res.data.IsSuccess) {
+            store.upRoleInfo(res.data.Data)
+          }
+        })
+      }
+    }).catch(err => {
+      wx.hideLoading()
+      console.log(err)
+    })
+  },
   onLoad(options) {
     computed(this, {
     })
   },
   onReady() { },
   onShow() {
-    store.upopenid('00000')
   },
   onHide() {
     app.globalData.store = store

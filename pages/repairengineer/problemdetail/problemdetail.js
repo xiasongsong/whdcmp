@@ -145,7 +145,7 @@ Page(observer({ store })({
       content: '确定驳回吗？',
       success: res => {
         if (res.confirm) {
-          let Status = '整改中'
+          let Status = '未受理'
           let TroubleID = this.data.id
           let ReasonID = this.data.refuseReasons[this.data.refuseReasonIndex].ID
           let Contents = this.data.refuseReasonText

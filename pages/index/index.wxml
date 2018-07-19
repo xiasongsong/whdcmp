@@ -2,14 +2,14 @@
   <image src="../../images/ibg.png" class="bg"></image>
   <image src="../../images/logo.png" mode="widthFix" class="logo"></image>
   <view class="btn-group flex">
-    <button
-      wx:for="{{roles}}"
-      wx:key="role-{{index}}"
-      data-type="{{item.type}}"
-      class="btn"
-      bindtap="start"
-    >
-      <image class="icon" src="{{item.icon}}" mode="widthFix"></image>
-      {{item.name}}</button>
+    <block wx:if="{{store.unionid}}">
+      <button wx:for="{{roles}}" wx:key="role-{{index}}" data-type="{{item.type}}" class="btn" bindtap="start">
+        <image class="icon" src="{{item.icon}}" mode="widthFix"></image>
+        {{item.name}}</button>
+    </block>
+    <view wx:else class="login-wrapper">
+      <view class="alert">需要您登录后才可使用</view>
+      <button class="btn" open-type='getUserInfo' bindgetuserinfo='getUserInfoHandler'>登录</button>
+    </view>
   </view>
 </view>

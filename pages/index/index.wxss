@@ -35,3 +35,12 @@
   width:92rpx;
   vertical-align: middle;
 }
+.login-wrapper{
+  width: 100%;
+  text-align: center;
+}
+.login-wrapper .alert{
+  font-size: 32rpx;
+  color: #888;
+  margin-bottom: 60rpx;
+}
