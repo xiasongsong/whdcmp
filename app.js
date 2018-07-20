@@ -53,6 +53,8 @@ App(observer({store})({
                 })
               },
               success: res => {
+                let openid = res.data.Data.OpenID
+                store.upopenid(openid)
                 /**
                  * 分情况
                  * 1.在其他地方授权，已经有unionid
@@ -61,9 +63,8 @@ App(observer({store})({
                 if (res.data.Data.UID) {
                   console.log('拿到unionid')
                   let UID = res.data.Data.UID
+                  console.log(UID)
                   store.upunionid(UID)
-                  let openid = res.data.Data.OpenID
-                  store.upopenid(openid)
                   /**===================缓存在本地================= */
                   wx.setStorageSync('unionid', UID)
                   getRoles(UID).then(res => {
@@ -81,6 +82,7 @@ App(observer({store})({
                   })
                 } else {
                   console.log('没拿到unionid，按钮触发授权')
+                  wx.hideLoading()
                   // 没有unionid,指向首页
                   wx.redirectTo({
                     url: '/pages/index/index'

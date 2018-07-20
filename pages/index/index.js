@@ -86,6 +86,14 @@ Page(observer({ store })({
     })
   },
   getUserInfoHandler (e) {
+    if (!e.detail.iv) {
+      wx.showModal({
+        title: '提示',
+        content: '授权失败，请重新登录',
+        showCancel: false
+      })
+      return
+    }
     let encryptedData = e.detail.encryptedData
     let iv = e.detail.iv
     wx.showLoading({
