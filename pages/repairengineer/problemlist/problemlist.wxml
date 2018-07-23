@@ -26,13 +26,16 @@
           </view>
         </view>
         <view class="card-footer">
+        <block wx:if="{{status === '未分配'}}">
+            <button size="mini" class="accept" data-tid="{{item.TroubleID}}" catchtap='DisContractor'>分配施工单位</button>
+          </block>
           <block wx:if="{{status === '未受理' || status === '整改中'}}">
             <button wx:if="{{item.IsTimeOut}}" size="mini" class="accept" data-tid="{{item.TroubleID}}" catchtap='timeoutAlert'>超时提醒</button>
           </block>
           <block wx:if="{{status === '取消中'}}">
             <button size="mini" class="refuse" data-tid="{{item.TroubleID}}" catchtap='openRefuse'>驳回</button>
-            <button size="mini" class="refuse" data-tid="{{item.TroubleID}}" catchtap='openClose'>强制关闭</button>
-            <button size="mini" class="accept" data-tid="{{item.TroubleID}}" catchtap='getAgree'>同意</button>
+            <button size="mini" class="refuse" data-tid="{{item.TroubleID}}" catchtap='openClose'>转至客服</button>
+            <button size="mini" class="accept" data-tid="{{item.TroubleID}}" catchtap='getAgree'>重新分配</button>
           </block>
         </view>
       </view>

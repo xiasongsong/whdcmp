@@ -59,11 +59,11 @@
     </swiper>
   </view>
   <view class="footer">
-    <view class="add {{activeTabIndex === 0 ? 'hide' : ''}}" bindtap="goAddNew">
+    <view class="add {{activeTabIndex === 0 ? 'hide' : ''}}" bindtap="goRefuse">
       <image src="../../../images/add.png" class="icon"></image>
-      <text class="text">新增问题</text>
+      <text class="text">暂不接收</text>
     </view>
-    <view class="refuse" bindtap="goRefuse">暂不接收</view>
+    <view class="refuse {{activeTabIndex === 0 ? 'hide' : ''}}" bindtap="goAddNew">新增问题</view>
     <view class="accept" bindtap="goAccept">接收</view>
   </view>
   <aside show="{{showFilter}}" bindclose="hideFilterBox">

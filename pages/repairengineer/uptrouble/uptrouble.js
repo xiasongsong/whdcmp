@@ -9,34 +9,38 @@ import {
 } from '../../../common/api/index.js'
 const app = getApp()
 const store = app.globalData.store
-Page(observer({store})({
+Page(observer({ store })({
   data: {
-    rooms:[],
-    part:[],
-    partres:[],
-    partrestouble:[],
-    partresContractor:[],
+    id: '',
+    rooms: [],
+    part: [],
+    partres: [],
+    partrestouble: [],
+    partresContractor: [],
     roomIndex: '',
     partIndex: '',
     partresIndex: '',
     partrestoubleIndex: '',
+    partresContractorIndex: '',
     uploadImages: [],
-    Urgency:["一般","紧急","加急"],
+    Urgency: ["一般", "紧急", "加急"],
     Description: "",//描述
     PartID: '',//部位
     PartResID: '',//部品
     PartResTroubleID: '',//问题
-    PartResContractorID:'',//施工单位
+    PartResContractorID: '',//施工单位
     RoomID: '',//房间
-    ScenePicture: ''//图片
+    ScenePicture: '',//图片
+    tid:'',//问题ID
+    trouble:[]
   },
-  bindInputHandler (e) {
+  bindInputHandler(e) {
     let Description = e.detail.value
     this.setData({
       Description
     })
   },
-  bindPickerChange (e) {
+  bindPickerChange(e) {
     let name = e.currentTarget.dataset.target
     this.setData({
       [`${name}Index`]: e.detail.value
@@ -54,8 +58,8 @@ Page(observer({store})({
         part: [],
         partres: [],
         partrestouble: [],
-        partresContractor:[],
-        PartResContractorID:''
+        partresContractor: [],
+        PartResContractorID: ''
       })
     }
     if (name === 'part') {
@@ -68,20 +72,20 @@ Page(observer({store})({
         partrestoubleIndex: '',
         partres: [],
         partrestouble: [],
-        partresContractor:[],
-        PartResContractorID:''
+        partresContractor: [],
+        PartResContractorID: ''
       })
     }
     if (name === 'partres') {
       this.getPartResTouble(this.data.partres[this.data.partresIndex].ID)
-      this.getPartResContractor(this.data.partres[this.data.partresIndex].ID,parseInt(this.data.id))
+      this.getPartResContractor(this.data.partres[this.data.partresIndex].ID, parseInt(this.data.id))
       this.setData({
         PartResID: this.data.partres[this.data.partresIndex].ID,
         PartResTroubleID: '',
         partrestoubleIndex: '',
         partrestouble: [],
-        partresContractor:[],
-        PartResContractorID:''
+        partresContractor: [],
+        PartResContractorID: ''
       })
     }
     if (name === 'partrestouble') {
@@ -95,11 +99,11 @@ Page(observer({store})({
       })
     }
   },
-  chooseImage () {
+  chooseImage() {
     let _self = this
     wx.chooseImage({
       count: 5 - _self.data.uploadImages.length, // 默认9
-      success (res) {
+      success(res) {
         let tempFilePaths = res.tempFilePaths
         let uploadImages = []
         wx.showLoading()
@@ -119,18 +123,18 @@ Page(observer({store})({
       }
     })
   },
-  removeImage (e) {
+  removeImage(e) {
     let index = e.target.dataset.index
     this.data.uploadImages.splice(index, 1)
     this.setData({
       uploadImages: this.data.uploadImages
     })
   },
-  previewImages () {},
+  previewImages() { },
   // 上传照片
   uploadFile(localId, cb) {
     wx.uploadFile({
-      url: `${baseUrl}/Content/FileUpload/UploadImg.aspx?v=${Math.random().toString(36).substr(2)}` ,
+      url: `${baseUrl}/Content/FileUpload/UploadImg.aspx?v=${Math.random().toString(36).substr(2)}`,
       filePath: localId,
       name: 'imgFile',
       success: res => {
@@ -142,11 +146,11 @@ Page(observer({store})({
       complete: res => {
       }
     })
-  }, 
+  },
   getRooms() {
     fetch({
       Act: 'HCGetRoom',
-      Data: JSON.stringify({
+      Data: JSON.stringify({ 
         HouseID: parseInt(this.data.id),
       })
     }).then(res => {
@@ -155,12 +159,12 @@ Page(observer({store})({
         this.setData({
           rooms
         })
-        if (!(this.data.RoomID !==0 && !this.data.RoomID)) {
-          let roomIndex = rooms.findIndex(item => item.ID == this.data.RoomID)
+        if (!(this.data.RoomID !== 0 && !this.data.RoomID)) {
+          let roomIndex = rooms.findIndex(item => item.ID === this.data.RoomID)
           this.setData({
             roomIndex
           })
-          this.getPart(this.data.rooms[this.data.roomIndex].ID)
+          this.getPart(this.data.RoomID)
         }
       }
     }).catch(err => {
@@ -176,9 +180,17 @@ Page(observer({store})({
     }).then(res => {
       if (res.data.IsSuccess) {
         let part = res.data.Data
+        let partIndex = part.findIndex(item => item.Name === this.data.trouble.Part)
+        partIndex = partIndex !== -1 ? partIndex : ''
+        let PartID = partIndex !== '' ? part[partIndex].ID : ''
         this.setData({
-          part
+          part,
+          partIndex,
+          PartID
         })
+        if (!(partIndex !== 0 && !partIndex)) {
+          this.getPartRes(PartID)
+        }
       }
     }).catch(err => {
       console.log(err)
@@ -193,9 +205,18 @@ Page(observer({store})({
     }).then(res => {
       if (res.data.IsSuccess) {
         let partres = res.data.Data
+        let partresIndex = partres.findIndex(item => item.Name === this.data.trouble.PartRes)
+        partresIndex = partresIndex !== -1 ? partresIndex : ''
+        let PartResID = partresIndex !== '' ? partres[partresIndex].ID : ''
         this.setData({
-          partres
+          partres,
+          partresIndex,
+          PartResID
         })
+        if (!(partresIndex !== 0 && !partresIndex)) {
+          this.getPartResTouble(PartResID)
+          this.getPartResContractor(this.data.partres[this.data.partresIndex].ID, parseInt(this.data.id))
+        }
       }
     }).catch(err => {
       console.log(err)
@@ -210,15 +231,20 @@ Page(observer({store})({
     }).then(res => {
       if (res.data.IsSuccess) {
         let partrestouble = res.data.Data
+        let partrestoubleIndex = partrestouble.findIndex(item => item.Description === this.data.trouble.PartResTrouble)
+        partrestoubleIndex = partrestoubleIndex !== -1 ? partrestoubleIndex : ''
+        let PartResTroubleID = partrestoubleIndex !== '' ? partrestouble[partrestoubleIndex].ID : ''
         this.setData({
-          partrestouble
+          partrestouble,
+          partrestoubleIndex,
+          PartResTroubleID
         })
       }
     }).catch(err => {
       console.log(err)
     })
-  }, 
-  getPartResContractor(id,houseid) {
+  },
+  getPartResContractor(id, houseid) {
     fetch({
       Act: 'HCGetPartResContractor',
       Data: JSON.stringify({
@@ -228,20 +254,44 @@ Page(observer({store})({
     }).then(res => {
       if (res.data.IsSuccess) {
         let partresContractor = res.data.Data
+        let partresContractorIndex = partresContractor.findIndex(item => item.ID === this.data.trouble.ContractorID)
+        partresContractorIndex = partresContractorIndex !== -1 ? partresContractorIndex : ''
         this.setData({
-          partresContractor
+          partresContractor,
+          partresContractorIndex
         })
       }
     }).catch(err => {
       console.log(err)
     })
-  }, 
-  goListpage() {
-    wx.redirectTo({
-      url: "/pages/check/check"
+  },
+  getTroubleInfo() {
+    fetch({
+      Act: 'HCGetTrouble',
+      Data: JSON.stringify({
+        TroubleID: this.data.tid
+      })
+    }).then(res => {
+      if (res.data.IsSuccess) {
+        let trouble = res.data.Data.troubleinfo
+        let id = trouble.HouseID
+        let RoomID = trouble.RoomID
+        this.setData({
+          trouble,
+          RoomID,
+          id,
+          Description: trouble.Description
+        })
+        this.getRooms()
+      }
+    }).catch(err => {
+      console.log(err)
     })
   },
-  Add () {
+  goListpage() {
+    wx.navigateBack()
+  },
+  Add() {
     var that = this;
     var eninfo = store.roleInfo
     var id = this.data.id
@@ -271,26 +321,28 @@ Page(observer({store})({
       })
       return
     }
-    wx.showLoading()  
+    if (this.data.PartResContractorID === '') {
+      wx.showToast({
+        title: '请选择施工单位'
+      })
+      return
+    }
+    wx.showLoading()
     fetch({
-      Act: 'HCAddTrouble',
+      Act: 'HCUpTrouble',
       Data: JSON.stringify({
-        HouseID: this.data.id,
-        HouseCheckID: this.data.checkid,
-        StaffID: eninfo.ID,
-        Description: this.data.Description,//描述
+        TroubleID: this.data.id,
         PartID: this.data.PartID,//部位
         PartResID: this.data.PartResID,//部品
         PartResTroubleID: this.data.PartResTroubleID,//问题
         RoomID: this.data.RoomID,//房间
-        ScenePicture: this.data.ScenePicture,//图片
-        Urgency: "一般",//紧急程度,
-        ContractorID: this.data.PartResContractorID
+        ContractorID: this.data.PartResContractorID,
+        Description: this.data.Description//描述
       })
     }).then(res => {
       wx.hideLoading()
       if (res.data.IsSuccess) {
-        that.goListpage()
+        // that.goListpage()
         wx.showToast({
           title: '提交成功',
           icon: 'succes',
@@ -304,22 +356,19 @@ Page(observer({store})({
       }
     })
   },
-  onLoad (options) {
-    let RoomID = options.roomid || ''
+  onLoad(options) { 
     this.setData({
-      id: options.id,
-      checkid: options.checkid,
-      RoomID
+      tid: options.tid
     })
   },
-  onReady () {},
-  onShow () {
-    this.getRooms()
+  onReady() { },
+  onShow() {
+    this.getTroubleInfo()
   },
-  onHide () {},
-  onUnload () {},
-  onPullDownRefresh () {},
-  onReachBottom () {},
+  onHide() { },
+  onUnload() { },
+  onPullDownRefresh() { },
+  onReachBottom() { },
   onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮

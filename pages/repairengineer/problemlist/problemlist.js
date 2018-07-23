@@ -222,6 +222,14 @@ Page(observer({ store })({
       }
     })
   },
+  DisContractor(e)
+  {
+    let TroubleID = e.target.dataset.tid
+    let status = this.data.status
+    wx.navigateTo({
+      url: `/pages/repairengineer/uptrouble/uptrouble?tid=${TroubleID}&status=${status}`
+    })
+  },
   // 驳回
   getRefuse(e) {
     // 受理 === 整改中

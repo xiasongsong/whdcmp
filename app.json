@@ -25,7 +25,8 @@
     "pages/leader/housedetail/housedetail",
     "pages/leader/acceptdetail/acceptdetail",
     "pages/leader/orderdetail/orderdetail",
-    "pages/leader/refuserecord/refuserecord"
+    "pages/leader/refuserecord/refuserecord",
+    "pages/repairengineer/uptrouble/uptrouble"
   ],
   "window": {
     "backgroundColor": "#f2f2f2",

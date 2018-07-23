@@ -59,7 +59,7 @@
   <view class="section">
     <textarea placeholder="请输入问题描述" class="textarea" bindinput="bindInputHandler"></textarea>
   </view>
-  <view class="section">
+  <view wx:if="{{false}}" class="section">
     <view class="title">上传照片</view>
     <view class="img-group">
       <view class="img-row">
@@ -73,5 +73,5 @@
       </view>
     </view>
   </view>
-  <button class="submit" bindtap='Add'>提交</button>
+  <button class="submit" disabled='{{PartResContractorID == 0}}' bindtap='Add'>提交</button>
 </view>
